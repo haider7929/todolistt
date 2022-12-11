@@ -1,10 +1,6 @@
 import React,{useState} from 'react';
-
-
-import logo from './logo.svg';
 import Forms from './components/Form';
 import './App.css';
-import todo from './todo';
 import Header from './components/Header';
 import TodosList from './components/TodosList';
 

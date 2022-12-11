@@ -1,34 +1,34 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { v4 as uuidv4 } from "uuid";
 
 const Forms = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
     const onInputChange = (event) => {
         setInput(event.target.value);
     };
-    const updateTodo = (title,id,completed)=>{
-        const newTodo = todos.map((todo)=>{
-            todo.id === id ? {title,id,completed} : todo
+    const updateTodo = (title, id, completed) => {
+        const newTodo = todos.map((todo) => {
+            todo.id === id ? { title, id, completed } : todo
         })
 
         setTodos(newTodo);
         setEditTodo("");
     };
-    useEffect(() =>{
-        if(editTodo){
+    useEffect(() => {
+        if (editTodo) {
             setInput(editTodo.title)
-        }else{
+        } else {
             setInput('')
         }
-    })
+    }, [setInput, editTodo]);
     const onFormSubmit = (event) => {
         event.preventDefault();
-        if(!editTodo){
+        if (!editTodo) {
             setTodos([...todos, { id: uuidv4(), title: input, completed: false }]);
-        setInput('');
-        }else{
-            updateTodo(input,editTodo.id, editTodo.completed)
+            setInput('');
+        } else {
+            updateTodo(input, editTodo.id, editTodo.completed)
         }
-        
+
 
     };
     return (
@@ -40,7 +40,10 @@ const Forms = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
                 required
                 onChange={onInputChange}
             />
-            <button className='button-add' type='submit'>Add</button>
+            <button className='button-add' type='submit'>
+                {editTodo ? "OK" : "ADD"}
+            </button>
+
         </form>
     )
 }
