@@ -1,12 +1,12 @@
 import React from 'react'
 import todo from '../todo'
 
-const TodosList = ({ todos, setTodos, setEdidtTodo }) => {
+const TodosList = ({ todos, setTodos, setEditTodo }) => {
 
     const handleComplete = (todo) => {
         setTodos(
             todos.map((item) => {
-                if (item.id === todo.id) {
+                if (item.id == todo.id) {
                     return { ...item, completed: !item.completed }
                 }
                 return item;
@@ -15,8 +15,10 @@ const TodosList = ({ todos, setTodos, setEdidtTodo }) => {
     }
 
     const handleEdit = ({ id }) => {
-        const findTodo = todos.find((todo) => todo.id == id);
-        setEdidtTodo(findTodo);
+        const findTodo = todos.find((todo) => todo.id === id);
+        console.log(findTodo);
+        setEditTodo(findTodo);
+
     }
 
     const handleDelete = ({ id }) => {
@@ -33,7 +35,7 @@ const TodosList = ({ todos, setTodos, setEdidtTodo }) => {
                     <input
                         type="text"
                         value={todo.title}
-                        className={'list ${todo.completed} ? "complete : "" '}
+                        className={todo.completed ? 'list complete' : "list" }
                         onChange={(event) => event.preventDefault()}
                     />
                     <div>
@@ -44,7 +46,7 @@ const TodosList = ({ todos, setTodos, setEdidtTodo }) => {
                             <i className='fa fa-edit'></i>
                         </button>
                         <button className='button-delete task-button' onClick={() => handleDelete(todo)} >
-                            <i class="fa fa-trash"></i>
+                            <i className="fa fa-trash"></i>
                         </button>
 
                     </div>
